@@ -1,5 +1,5 @@
 module.exports = {
-	port: 4444,
+	port: 80,
 	movieDb: {
 		key: "9bc8fa1df47f3dde957bbd7f9dd5b48a"
 	},
