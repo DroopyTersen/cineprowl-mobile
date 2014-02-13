@@ -1,0 +1,10 @@
+<ul data-role='listview'>
+	{{#movies}}
+	<li class='searchResult' data-icon="false">
+		<a href='/movies/details/{{id}}'>
+			<img src='{{posterThumb}}'/>
+			<h4 class="ui-li-heading">{{title}}</h4>
+		</a>
+	</li>
+	{{/movies}}
+</ul>

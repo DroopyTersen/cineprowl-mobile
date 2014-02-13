@@ -1,0 +1,10 @@
+<div data-role="content">
+	<ul data-role='listview'>
+		{{#genres}}
+		<li><a href='/movies/genres/{{_id}}'>
+			<h2 class="ui-li-heading">{{_id}}</h2>
+			<span class="ui-li-count">{{count}}</span>
+		</a></li>
+		{{/genres}}
+	</ul>
+</div>

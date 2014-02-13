@@ -1,0 +1,20 @@
+
+<div data-role="navbar">
+	<ul id='sortBar'>
+		<li><a class='sortLink' data-sortType='recent' href="/movies/recent">Added</a></li>
+		<li><a class='sortLink' data-sortType='rating' href="/movies/topRated">Rating</a></li>
+		<li><a class='sortLink' data-sortType='name' href="/movies/byName">Name</a></li>
+	</ul>
+</div>
+<div data-role="navbar">
+    <ul>
+        <li><a href="#filterPanel">Filter Results</a></li>
+    </ul>
+</div>
+<script>
+	$(".sortLink[data-sortType={{currentState.sortType}}]").addClass("ui-btn-active");
+	// $(".sortLink").on("click", function (event) {
+	// 	console.log("HERE");
+	// 	$("#movieList").fadeOut(100);
+	// });
+</script>

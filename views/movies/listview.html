@@ -1,0 +1,9 @@
+<div data-role="content">
+	{{> sortbar}}
+	<ul data-role='listview' id='movieList'>
+		{{> movielist}}
+	</ul>
+</div>
+<script>
+	setTimeout(infiniteScroll.init, 1000);
+</script>

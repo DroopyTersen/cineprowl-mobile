@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+	<title>{{pageTitle}}</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'/>
+	<link rel="stylesheet" type="text/css" href="/bower_components/jquery-mobile-min/jquery.mobile.css">
+	<link rel="stylesheet" type="text/css" href="/styles/themes/cineprowl.css">
+	<link rel="stylesheet" type="text/css" href="/styles/style.css">
+	<script type="text/javascript" src='/bower_components/jquery/jquery.js'></script>
+	<script>
+	//mobileinit event must be bound before jQuery mobile is loaded
+	$(document).on("mobileinit", function() {
+		$.mobile.ajaxEnabled = false;
+	});
+	</script>
+	<script type="text/javascript" src='/bower_components/jquery-mobile-min/jquery.mobile.js'></script>
+	<script type="text/javascript" src='/js/events.js'></script>
+	<script type="text/javascript" src='/js/infiniteScroll.js'></script>
+
+</head>
+<body>
+	<div data-role='page' id='{{route}}' data-theme='a'>
+		{{> header}}
+		{{> filterpanel}}
+		{{> menupanel}}
+		{{> searchPanel}}
+		{{{body}}}
+	</div>
+</body>
+</html>

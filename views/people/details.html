@@ -1,0 +1,31 @@
+<div class='content details' data-role="content">
+	<section class='ui-grid-a primary'>
+		<div class='ui-block-a'>
+			<img class='poster' src='{{profileImage}}' />
+		</div>
+		<div class='ui-block-b'>
+			<h1 class='title'>{{name}}</h1>
+			<span class='label'>Birthday: </span><span class='value'>{{birthday}}</span><br/>
+			<span class='label'>Birth Place: </span><span class='value'>{{birthPlace}}</span><br/>
+		</div>
+	</section>
+	<section data-role='collapsible' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' data-inset='false'>
+		<h2>Biography</h2>
+		<p>{{biography}}</p>
+	</section>
+	<section data-role='collapsible' data-collapsed='false' data-collapsed-icon='arrow-r' data-expanded-icon='arrow-d' data-inset='false'>
+		<h2>Filmography</h2>
+		<ul data-role='listview' class='filmography'>
+			{{#filmography}}
+			<li {{#if owned}}class='owned'{{/if}}>
+				<a href='{{url}}' {{#unless owned}}target='_blank'{{/unless}}>
+					<img class='poster' src='{{posterUrl}}'/>
+					<h2 class="ui-li-heading">{{title}}</h2>
+					<p class="ui-li-desc">{{release}}</p>
+					<p class="ui-li-desc"><strong>{{character}}</strong></p>
+				</a>
+			</li>
+			{{/filmography}}
+		</ul>
+	</section>
+</div>

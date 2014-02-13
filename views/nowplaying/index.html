@@ -1,0 +1,27 @@
+<div class='content' id='nowPlaying' data-role="content">
+	{{#if vlcStatus}}
+	<section>
+		<a href='#' class='play' id='pause'>
+			<img class='backdrop' src='{{nowPlaying.backgroundUrl}}' />
+			<img class='play' src='/images/pause-large.png'/>
+		</a>
+	</section>
+		<h1 class='title'>{{nowPlaying.title}}</h1>
+	<section class='sliders'>
+		<h2 id='time'></h2>
+		<input type="range" name="seek" id="seek" value="{{vlcStatus.time}}" tick="0.01" min="0" max="{{vlcStatus.duration}}"/>
+		<label>Volume</label>
+		<input type='range' name='volume' id='volume' value='{{vlcStatus.volume}}' min='0' max='200'/>
+
+		<a href='#' id='stop'>Stop</a>
+	</section>
+	<script type='text/javascript'>
+		nowPlaying = setInterval(function() {
+			$.get("/nowplaying/status", eventHandlers.vlcToolbar.refreshUI);
+		}, 1000);		
+	</script>
+	{{else}}
+		<h1 style='text-align:center'>Nothing is currently playing</h1>
+	{{/if}}
+</div>
+
