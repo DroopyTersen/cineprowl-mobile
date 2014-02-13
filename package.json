@@ -10,12 +10,7 @@
     "hbs": "~2.3.1",
     "q": "~0.9.7",
     "request": "~2.27.0",
-    "mongodb": "~1.3.19",
-    "cheerio": "~0.12.2",
-    "xml2js": "~0.2.8",
-    "xmldoc": "~0.1.2",
     "droopy-moviedb": "~0.0.1",
-    "droopy-vlc": "~0.0.0",
-    "droopy-mongo": "~0.0.0"
+    "droopy-vlc": "~0.0.1"
   }
 }

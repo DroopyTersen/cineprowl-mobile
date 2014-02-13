@@ -1,4 +1,4 @@
-var movieService = new(require("../dataaccess/MovieService"))();
+var movieService = new(require("../../Services/MovieService"))();
 var VlcService = require("droopy-vlc");
 var currentState = require("../currentstate");
 var config = require("../config");
@@ -48,17 +48,13 @@ module.exports = {
 		});
 	},
 	stop: function(req, res) {
-
-		request.get(config.vlc.url + "/stop", function(err, resp) {
-
-			if (err) {
-				console.log(err)
-			} else {
-				var movieId = currentstate.nowPlaying.id;
-				currentstate.nowPlaying = null;
-				currentstate.vlcStatus = null;
-				res.redirect("/movies/details/" + movieId);
-			}
+		vlcService.stop().then(function() {
+			var movieId = currentstate.nowPlaying.id;
+			currentstate.nowPlaying = null;
+			currentstate.vlcStatus = null;
+			res.redirect("/movies/details/" + movieId);
+		}).fail(function(){
+			console.log(arguments);
 		});
 	}
 };

@@ -1,5 +1,4 @@
-var movieService = new(require("../dataaccess/MovieService"))();
-var imageHelper = require("../utils/imageHelper");
+var movieService = new(require("../../Services/MovieService"))();
 var currentState = require("../currentState");
 
 var listView = function(res) {
