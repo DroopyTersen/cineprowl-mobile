@@ -1,1 +1,84 @@
-<h1>Homepage</h1>
+<section class='content' data-role="content">
+	<div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
+		<div class='swipe-wrap'>
+		{{#movies}}
+		    <div>
+		    	<img src='{{backdrop}}'/>
+		    	<span class='caption'>{{title}}</span>
+		    </div>
+		{{/movies}}
+	  	</div>
+	</div>
+
+</section>
+<section class='footer' data-role='footer' >
+	<img src='/images/logo-large2.png' alt='CineProwl'/>
+</section>
+<style>
+.ui-content {
+	background: #444;
+}
+.content {
+	padding:15px;
+}
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+  background: #444;
+}
+.swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe-wrap > div {
+  float:left;
+  width:100%;
+  position: relative;
+
+}
+.swipe-wrap > div > img{
+  float:left;
+  width:100%;
+box-shadow: 0 1px 5px rgba(0,0,0,.85),inset 0 0 1px rgba(255,255,255,.35);
+border-radius: 5px;
+}
+.swipe-wrap .caption {
+color: #f7f7f7;
+text-shadow: none;
+background: rgba(0, 0, 0, 0.8);
+padding: 10px 20px;
+font-size: 1.4em;
+margin: 0;
+position: relative;
+top: -48px;
+display: inline;
+float:left;
+}
+.footer {
+	background: #eee;
+	border-top:4px solid #000;
+	padding:15px;
+	position: relative;
+}
+.footer img {
+width: 70%;
+margin-left: 15%;
+text-align: center;
+}
+</style>
+<script>
+
+$(document).ready(function () {
+	var elem = document.getElementById('mySwipe');
+	window.mySwipe = Swipe(elem, {
+	  // startSlide: 4,
+	  	auto: 5000,
+	  continuous: true
+	  // disableScroll: true,
+	  // stopPropagation: true,
+	  // callback: function(index, element) {},
+	  // transitionEnd: function(index, element) {}
+	});
+});
+</script>

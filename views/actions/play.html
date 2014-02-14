@@ -1,0 +1,81 @@
+
+<div class='content' data-role='content'>
+	<h1 class='centeredTitle'>Choose a screen</h1>
+	<section class='ui-grid-a primary'>
+		<div class='block ui-block-a'>
+			<div>
+				<a href='{{nasUrl}}' target='_blank'>
+					<img class='screenOption' src='/images/device.png' alt='This device'/>
+					<h3 class='screenOption'>This device</h3>
+				</a>
+			</div>
+		</div>
+		<div class='block ui-block-b'>
+			<div>			
+				<a href='#' class='vlc' data-id='{{id}}'>
+					<img class='screenOption' src='/images/ratburn.jpg' alt='This device'/>
+					<h3 class='screenOption'>Ratburn (laptop)</h3>
+				</a>
+			</div>
+
+		</div>
+	</section>
+	<h2 class='centeredTitle'>Launching {{title}}...</h2>
+</div>
+
+<script>
+(function() {
+	$("a.vlc").on("click", function (event) {
+		event.preventDefault();
+		var url = '/actions/vlc/' + $(this).data('id');
+		$.get(url, function(){
+			$(".content").html("<h3>Launching VLC...</h3>");
+			setTimeout(function(){
+				$.mobile.changePage("/NowPlaying");
+			}, 1000)
+		});
+	});
+})();
+</script>
+
+<style>
+.ui-page > div {
+background: #444;
+}
+.centeredTitle {
+text-align: center;
+text-shadow: none;
+color: #eee;
+}
+
+h3.screenOption {
+color: #f7f7f7;
+text-shadow: none;
+background: rgba(0,0,0,0.8);
+padding: 10px 20px;
+font-size: 1.4em;
+margin: 0;
+}
+img.screenOption {
+	width:100%;
+}
+.block {
+	opacity: .9;
+}
+.block a {
+	text-decoration: none;
+}
+.block:hover {
+	opacity: 1;
+}
+.block.ui-block-a {
+padding-right: 10px;
+}
+.block.ui-block-b {
+padding-left: 10px;
+}
+.block > div {
+	border:4px solid #FF6600;
+	background: #fff;
+}
+<style>

@@ -9,6 +9,12 @@ module.exports = {
 	play: function(req, res) {
 		var id = parseInt(req.params.id, 10);
 		movieService.getById(id).then(function(movie) {
+			res.render("actions/play", movie);
+		});	
+	},
+	vlc: function(req, res) {
+		var id = parseInt(req.params.id, 10);
+		movieService.getById(id).then(function(movie) {
 			currentState.nowPlaying = movie;
 			var url = config.vlc.url + "/play?filepath=" + movie.file.filepath;
 			Http.prototype.get(url);

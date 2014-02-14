@@ -2,7 +2,7 @@
 
 	<section class='ui-grid-a primary'>
 		<div class='ui-block-a'>
-			<a data-url='/actions/play/{{id}}' href="#" class='play' target='_blank' title='Play {{title}}'>
+			<a href='/actions/play/{{id}}' class='play' title='Play {{title}}'>
 				<img class='poster' src='{{posterUrl}}' />
 				<img class='play' src='/images/play-large.png'/>
 			</a>
@@ -76,12 +76,7 @@
 </div>
 <script type="text/javascript">
 (function() {
-	$("a.play").on("click", function (event) {
-		event.preventDefault();
-		$.get($(this).data("url"), function(){
-			$.mobile.changePage("/NowPlaying");
-		});
-	});
+
 	$("#watchedToggle").on("click", function() {
 		var $this = $(this);
 		var watched = $this.children().first().text() === "Watched";
