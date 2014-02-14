@@ -11,6 +11,7 @@
     "q": "~0.9.7",
     "request": "~2.27.0",
     "droopy-moviedb": "~0.0.1",
-    "droopy-vlc": "~0.0.1"
+    "droopy-vlc": "~0.0.1",
+    "droopy-http": "0.0.1"
   }
 }

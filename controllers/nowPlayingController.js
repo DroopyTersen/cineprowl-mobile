@@ -2,7 +2,7 @@ var movieService = new(require("../../Services/MovieService"))();
 var VlcService = require("droopy-vlc");
 var currentState = require("../currentstate");
 var config = require("../config");
-var request = require("request");
+var Http = require("droopy-http");
 var vlcService = new VlcService(config.vlc.url);
 
 module.exports = {
@@ -48,7 +48,7 @@ module.exports = {
 		});
 	},
 	stop: function(req, res) {
-		vlcService.stop().then(function() {
+		Http.prototype.get(config.vlc.url + "/stop").then(function() {
 			var movieId = currentstate.nowPlaying.id;
 			currentstate.nowPlaying = null;
 			currentstate.vlcStatus = null;
