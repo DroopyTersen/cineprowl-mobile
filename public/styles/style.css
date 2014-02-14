@@ -6,7 +6,16 @@ h1 { font-weight: normal}
 a {
   color: #00B7FF;
 }
-
+h1, h2, h3, h4, h5 {
+	font-weight: 100;
+}
+.ui-body-a,
+.ui-body-a input,
+.ui-body-a select,
+.ui-body-a textarea,
+.ui-body-a button {
+	      font-family: Century Gothic, sans-serif;
+}
 .logo {
 	padding: 5px;
 	width: 55px;
