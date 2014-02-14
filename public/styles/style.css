@@ -41,6 +41,7 @@ header .ui-btn img {
 .ui-body-a, .ui-overlay-a {
 	background: none;
 	border:none;
+	text-shadow:none;
 }
 .ui-btn.transparent {
 	background: none;

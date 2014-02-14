@@ -1,84 +1,148 @@
 <section class='content' data-role="content">
-	<div id='mySwipe' style='max-width:500px;margin:0 auto' class='swipe'>
-		<div class='swipe-wrap'>
-		{{#movies}}
-		    <div>
-		    	<img src='{{backdrop}}'/>
+	<section id='recentAdditions'>
+		<h2 class='sectionTitle dark'><a href='/movies/recent'>Recent Additions</a></h2>
+		<div id='mainSlider' style='margin:0 auto' class='owl-carousel owl-theme slider'>
+			{{#recent}}
+		    <div class='item'><div>
+		    	<a href='/movies/details/{{id}}'>
+		    		<img class='movie' src='{{backdrop}}'/>
+	    		</a>
 		    	<span class='caption'>{{title}}</span>
-		    </div>
-		{{/movies}}
-	  	</div>
+		    </div></div>
+			{{/recent}}
+		</div>
+	</section>
+	<section id='queue'class='subSection'>
+		<h2 class='sectionTitle'>Queue</h2>
+		<div id='' style='margin:0 auto' class='owl-carousel owl-theme carousel'>
+			{{#queue}}
+	    	<a href='/movies/details/{{id}}'>
+	    		<img class='movie' src='{{posterThumb}}'/>
+    		</a>
+			{{/queue}}
+		</div>
+	</section>
+	<div class='unwatched' data-role="navbar">
+	    <ul>
+	        <li><a href="/movies/unwatched" class="ui-btn-active">Browse All Unwatched</a></li>
+	    </ul>
 	</div>
-
+	<section id='people'class='subSection'>
+		<h2 class='sectionTitle'>Favorites</h2>
+		<div id='' style='margin:0 auto' class='owl-carousel owl-theme carousel'>
+			{{#favorites}}
+	    	<a href='/movies/details/{{id}}'>
+	    		<img class='movie' src='{{posterThumb}}'/>
+    		</a>
+			{{/favorites}}
+		</div>
+	</section>
 </section>
-<section class='footer' data-role='footer' >
-	<img src='/images/logo-large2.png' alt='CineProwl'/>
-</section>
+<footer class='footer' data-role='footer'>
+	<img class='bigLogo' src='/images/logo-large2.png'/>
+</footer>
 <style>
-.ui-content {
-	background: #444;
-}
 .content {
-	padding:15px;
+	padding:0;
 }
-.swipe {
-  overflow: hidden;
-  visibility: hidden;
-  position: relative;
-  background: #444;
-}
-.swipe-wrap {
-  overflow: hidden;
-  position: relative;
-}
-.swipe-wrap > div {
-  float:left;
-  width:100%;
-  position: relative;
-
-}
-.swipe-wrap > div > img{
-  float:left;
-  width:100%;
-box-shadow: 0 1px 5px rgba(0,0,0,.85),inset 0 0 1px rgba(255,255,255,.35);
-border-radius: 5px;
-}
-.swipe-wrap .caption {
-color: #f7f7f7;
-text-shadow: none;
-background: rgba(0, 0, 0, 0.8);
-padding: 10px 20px;
-font-size: 1.4em;
-margin: 0;
-position: relative;
-top: -48px;
-display: inline;
-float:left;
-}
-.footer {
+.subSection {
+	border-top: 4px solid #FF6600;
+	padding: 0 15px 25px 15px;
 	background: #eee;
-	border-top:4px solid #000;
-	padding:15px;
+}
+.subSection .sectionTitle {
+	margin: 25px 0 5px 0;
+}
+.sectionTitle {
+	text-decoration: none;
+}
+.unwatched.ui-navbar {
+	margin:0;
+	height:auto;
+}
+#recentAdditions {
+	background: #444;
+	padding: 15px;
+}
+#mainSlider .item {
 	position: relative;
 }
-.footer img {
-width: 70%;
-margin-left: 15%;
-text-align: center;
+#mainSlider .item > div{
+	display: block;
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 0px;
+	border-radius: 4px;
+	text-align: center;
+}
+#mainSlider .item img.movie{
+	width: 100%;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 5px 0px #000;
+	box-shadow: 0 1px 5px 0px #000;
+}
+.slider .item .caption {
+	color: #f7f7f7;
+	text-shadow: none;
+	font-size: 1.4em;
+	margin: 0 auto;
+	width: 100%;
+}
+.owl-theme .owl-controls .owl-page span {
+	background: #FF6600;
+}
+.sectionTitle.dark {
+	font-size: 1.8em;
+	margin: 0 0 3px 5%;
+}
+.sectionTitle.dark a,
+.sectionTitle.dark a:visited {
+	text-decoration: none;
+	color: #f7f7f7;
+	font-weight: 100;
+}
+.carousel .owl-item img {
+	border: 4px solid #ff6600;
+	height: 130px;
+}
+.carousel .owl-wrapper-outer {
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	padding: 11px 0 8px;
+}
+footer.footer.ui-footer {
+
+background: #fff;
+	text-align: center;
+	padding: 20px;
+	border-top: 2px solid #acacac;
+	border-bottom: none;
+}
+footer.footer.ui-footer img.bigLogo {
+	width:60%;
 }
 </style>
 <script>
+$(document).ready(function() {
+ 
+  $("#mainSlider").owlCarousel({
+ 
+      navigation : false, // Show next and prev buttons
+      slideSpeed : 300,
+      paginationSpeed : 400,
+      singleItem:true,
+      // autoPlay:true,
+      // autoHeight:true
+  });
 
-$(document).ready(function () {
-	var elem = document.getElementById('mySwipe');
-	window.mySwipe = Swipe(elem, {
-	  // startSlide: 4,
-	  	auto: 5000,
-	  continuous: true
-	  // disableScroll: true,
-	  // stopPropagation: true,
-	  // callback: function(index, element) {},
-	  // transitionEnd: function(index, element) {}
-	});
+  var owl = $("#owl-demo");
+ 
+  $(".carousel").owlCarousel({
+      items : 10, //10 items above 1000px browser width
+      itemsDesktop : [1000,7], //7 items between 1000px and 801px
+      itemsDesktopSmall : [700,5], // betweem 900px and 601px
+      itemsTablet : [500,4], // itemsMobile disabled - inherit from itemsTablet option
+      itemsMobile : [400, 3] // itemsMobile disabled - inherit from itemsTablet option
+  });
 });
 </script>
