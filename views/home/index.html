@@ -28,13 +28,13 @@
 	    </ul>
 	</div>
 	<section id='people'class='subSection'>
-		<h2 class='sectionTitle'>Favorites</h2>
+		<h2 class='sectionTitle'>Prolific Actors</h2>
 		<div id='' style='margin:0 auto' class='owl-carousel owl-theme carousel'>
-			{{#favorites}}
-	    	<a href='/movies/details/{{id}}'>
-	    		<img class='movie' src='{{posterThumb}}'/>
+			{{#actors}}
+	    	<a href='/people/details/{{id}}' title='{{name}}'>
+	    		<img class='movie' src='{{profileImage}}'/>
     		</a>
-			{{/favorites}}
+			{{/actors}}
 		</div>
 	</section>
 </section>
