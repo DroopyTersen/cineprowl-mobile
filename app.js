@@ -4,7 +4,7 @@ var express = require('express'),
 	config = require("./config");
 
 var app = express();
-app.set('port', config.port);
+//app.set('port', config.port);
 
 //Setup handlebars view engine
 app.set('views', __dirname + '/views');
@@ -36,6 +36,6 @@ if ('development' == app.get('env')) {
 require("./router").configureRoutes(app);
 app.use(express.static("public"));
 app.use(app.router);
-
-app.listen(config.port);
-console.log("CineProwl started on port " + config.port);
+var port = process.env.PORT || config.port;
+app.listen(port);
+console.log("CineProwl started on port " + port);
