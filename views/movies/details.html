@@ -39,6 +39,9 @@
 		    <li>
 		    	<a  class='collectionToggle' data-collection='favorite' href="#">{{#tagHelper 'favorites' tags}}{{/tagHelper}}</a>
 		    </li>
+		    <li>
+		    	<a id="deleteButton" href="#">Delete Movie</a>
+		    </li>
 		</ul>
 	</section>
 	
@@ -81,9 +84,23 @@
 		var $this = $(this);
 		var watched = $this.children().first().text() === "Watched";
 		var id = $("#movieId").val();
-		$.getJSON("/movies/toggleWatched/" + id + "?watched=" + !watched);
+		$.get("/movies/toggleWatched/" + id + "?watched=" + !watched);
 		var newText = watched ? "Unwatched" : "Watched";
 		$this.children().first().text(newText);
+	});
+	$("#deleteButton").on("click", function(event) {
+		event.preventDefault();
+		if(window.confirm("Are you sure you want to delete?")) {
+			var id = $("#movieId").val();
+			$.get("/movies/remove/" + id).done(function() {
+				console.log("HERE");
+				if (window.history && window.history.back) {
+					window.history.back();
+				} else {
+					window.location.href = "/";
+				}
+			});			
+		}
 	});
 	$(".collectionToggle").on("click", function(e) {
 		if(e) e.preventDefault();
@@ -91,7 +108,7 @@
 		var value = $this.text().indexOf("Add to") > -1;
 		var collection = $this.data("collection");
 		var url = "/movies/toggle" + collection + "/" + $("#movieId").val() + "?" + collection + "=" + value;
-		$.getJSON(url);
+		$.get(url);
 		var newText = value ? "Remove from " : "Add to ";
 		newText += collection;
 		$this.text(newText);

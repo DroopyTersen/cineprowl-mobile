@@ -45,7 +45,8 @@ header .ui-btn img {
 }
 .ui-li-thumb {
 	max-height: 100px;
-	height: 91px;
+	height: 100%;
+	width:63px;
 }
 .ui-body-a, .ui-overlay-a {
 	background: none;
@@ -72,6 +73,9 @@ color: #696969;
 text-shadow: none;
 text-align: center;
 font-size: 1.3em;
+}
+.ui-listview .ui-li>.ui-btn-inner {
+	border-top:none;
 }
 .details .primary .poster {
 	margin-right: 20px;
@@ -100,7 +104,7 @@ img.play:hover {
 	background:#fff;
 }
 .profile.ui-li-thumb{
-	height:auto;
+	width:58px;
 }
 .details .primary .title {
 	text-transform:uppercase;

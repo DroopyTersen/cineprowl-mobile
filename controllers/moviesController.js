@@ -46,14 +46,17 @@ module.exports = {
 		currentState.filter.watched = false;
 		listView(res);
 	},
-
+	remove: function(req, res) {
+		var movieId = parseInt(req.params.id, 10);
+		movieService.remove(movieId);
+		res.send("success. (hopefully...)")
+	},
 	togglewatched: function(req, res) {
 		var movieId = parseInt(req.params.id, 10);
 		var watched = (req.query.watched.toLowerCase() === "true");
 		movieService.toggleWatched(movieId, watched);
 		res.send("success");
 	},
-
 	togglefavorite: function(req, res) {
 		var movieId = parseInt(req.params.id, 10);
 		var value = (req.query.favorite.toLowerCase() === "true") ? new Date() : null;
@@ -79,7 +82,6 @@ module.exports = {
 			res.render("movies/collection", viewModel);
 		});
 	},
-
 	favorites: function(req, res) {
 		movieService.favorites().then(function(movies){
 			var viewModel = {
@@ -91,7 +93,6 @@ module.exports = {
 			res.render("movies/collection", viewModel);
 		});
 	},
-
 	genres: function(req, res) {
 		if (req.params.id) {
 			var genre = req.params.id;
