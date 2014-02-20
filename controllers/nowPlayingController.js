@@ -1,4 +1,4 @@
-var movieService = new(require("../../Services/MovieService"))();
+var movieService = new(require("../services/MovieService"))();
 var VlcService = require("droopy-vlc");
 var currentState = require("../currentstate");
 var config = require("../config");

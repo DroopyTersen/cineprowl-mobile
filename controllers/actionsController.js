@@ -1,5 +1,5 @@
 "use strict";
-var movieService = new(require("../../Services/MovieService"))();
+var movieService = new(require("../services/MovieService"))();
 var currentState = require("../currentstate");
 var config = require("../config");
 var Http = require("droopy-http");

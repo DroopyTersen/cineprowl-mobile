@@ -1,7 +1,7 @@
-var movieService = new(require("../../Services/MovieService"))();
+var movieService = new(require("../services/MovieService"))();
 var config = require('../config');
 var movieDbService = new(require("droopy-moviedb"))(config.movieDb.key);
-var Person = require("../../Models/Person");
+var Person = require("../models/Person");
 var q = require("q");
 
 module.exports = {

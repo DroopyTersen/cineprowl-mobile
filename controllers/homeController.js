@@ -1,6 +1,6 @@
 "use strict";
-var movieService = new(require("../../Services/MovieService"))();
-var imageHelper = require("../../Models/imageHelper");
+var movieService = new(require("../services/MovieService"))();
+var imageHelper = require("../models/imageHelper");
 var Q = require("q");
 module.exports = {
 	index: function(req, res) {

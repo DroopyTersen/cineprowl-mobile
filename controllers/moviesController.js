@@ -1,4 +1,4 @@
-var movieService = new(require("../../Services/MovieService"))();
+var movieService = new(require("../services/MovieService"))();
 var currentState = require("../currentState");
 
 var listView = function(res) {
