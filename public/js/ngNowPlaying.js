@@ -17,7 +17,8 @@
 	};
 
 	var nowPlayingController = function($scope, vlcService) {
-		$scope.vlcStatus = "Not null";
+		$scope.initComplete = false;
+		$scope.vlcStatus = null;
 		$scope.controls = {
 			togglePause: function() {
 				$scope.vlcStatus.state = $scope.vlcStatus.state === "playing" ? "paused" : "playing";
@@ -56,8 +57,6 @@
 				vlcService.vlcRequest("fullscreen").success(updateScope);
 			}
 		};
-		$scope.percentageDone = "0%";
-		$scope.controls.pauseToggle = $scope.vlcStatus.state === "playing" ? "pause" : "play";
 
 		var updateScope = function(data) {
 			$scope.vlcStatus = data.vlcStatus;
@@ -70,10 +69,18 @@
 
 
 		var init = function() {
-			vlcService.vlcRequest("status").success(updateScope);
-			setInterval(function() {
-				vlcService.vlcRequest("status").success(updateScope);
-			}, 1000);
+			vlcService.vlcRequest("status")
+			.error(function(){
+				$scope.vlcStatus = null;
+			}).success(function(status){
+				updateScope(status);
+				setInterval(function() {
+					vlcService.vlcRequest("status").success(updateScope);
+				}, 1000);				
+			})
+			.finally(function() {
+				$scope.initComplete = true;
+			});
 		};
 
 		init();

@@ -1,6 +1,6 @@
 <script src='/bower_components/angular/angular.min.js'></script>
-<div class='content' id='nowPlaying' data-role="content" ng-app='nowPlaying'>
-	<section ng-controller='nowPlayingController'>
+<div class='content' id='nowPlaying' data-role="content" ng-app='nowPlaying' >
+	<section ng-controller='nowPlayingController' ng-show="initComplete === true">
 		<section id='remote' ng-show='vlcStatus'>
 			<img class='backdrop' ng-src='{[{movie.backgroundUrl}]}' />
 			<a href='#' ng-click='controls.togglePause()' class='pauseToggle'>
@@ -42,8 +42,8 @@
 			</div>
 		</section>
 		
-		<section ng-hide='vlcStatus'>
-			<h1>Nothing is currently playing...</h1>
+		<section class='notPlaying' ng-hide='vlcStatus'>
+			<h1>Nothing is playing.</h1>
 		</section>
 	</section>
 </div>
@@ -52,6 +52,12 @@
 <style>
 html {
 	background: #1e1e1e;
+}
+.notPlaying {
+	margin: 0;
+	padding: 90px 0;
+	text-align: center;
+	font-size: 1.6em;
 }
 #nowPlaying .toolbar {
 	text-align: center;

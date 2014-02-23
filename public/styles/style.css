@@ -136,14 +136,24 @@ img.play:hover {
 	margin-left:0;
 	margin-bottom: 10px;
 }
+#searchPanel .ui-panel-inner {
+	padding: 0
+}
+#searchPanel .ui-input-search {
+	margin: 10px;
+}
 #searchResults {
 	padding-left: 0;
 }
 #searchResults .ui-li.ui-btn {
 	background: none;
+	border: 1px solid #;
 }
 #searchResults .ui-li-thumb {
-height: 50px;
+	width: 38px;
+}
+#searchResults .searchResult > .ui-btn-inner {
+	border: none;
 }
 
 #searchResults .ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,
@@ -158,31 +168,20 @@ font-family: "Segoe UI Light"
 }
 
 #searchResults .ui-li-heading {
-	font-size:13px;
-	font-weight: normal;
+font-size: 12px;
+font-weight: 100;
+margin: 15px 2px;
+padding-left: 2px;
 }
-#searchResults .searchResult.selected {
-	background:#FF6600;
-}
-
-#searchResults .searchResult.selected a {
-	color:#fff;
+#searchResults .searchResult.selected,
+#searchResults .searchResult:active
+ {
+	border: 1px solid #ff6600;
 }
 
 #searchResults .searchResult:hover {
 	background:#eee;
 }
-
-#searchResults .searchResult:active {
-	background:#FF6600;
-}
-
-#time {
-    font-size: 2.2em;
-    text-align: center;
-    margin-bottom: 0;	
-}
-
 #watchedFilter .ui-controlgroup-controls {
 	position: relative;
 	width:100%;

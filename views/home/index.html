@@ -44,11 +44,17 @@
 <style>
 .content {
 	padding:0;
+	background: #eee;
 }
 .subSection {
 	border-top: 4px solid #FF6600;
-	padding: 0 15px 25px 15px;
+	padding: 0 15px 0px 15px;
 	background: #eee;
+}
+#queue {
+	position: relative;
+	top:-35px;
+	padding-bottom: 0px
 }
 .subSection .sectionTitle {
 	margin: 25px 0 5px 0;
@@ -59,17 +65,16 @@
 .unwatched.ui-navbar {
 	margin:0;
 	height:auto;
+	position: relative;
+	top: -20px;
 }
 #recentAdditions {
-	padding: 15px;
 	background: #444; /* Old browsers */
 background: -moz-radial-gradient(center, ellipse cover,  #666 1%, #333 120%); /* FF3.6+ */
 background: -webkit-gradient(radial, center center, 0px, center center, 120%, color-stop(1%,#666), color-stop(120%,#333)); /* Chrome,Safari4+ */
 background: -webkit-radial-gradient(center, ellipse cover,  #666 1%,#333 120%); /* Chrome10+,Safari5.1+ */
 background: -o-radial-gradient(center, ellipse cover,  #666 1%,#333 120%); /* Opera 12+ */
 background: -ms-radial-gradient(center, ellipse cover,  #666 1%,#333 120%); /* IE10+ */
-background: radial-gradient(ellipse at center,  #666 1%,#333 120%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666', endColorstr='#333',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 }
 #mainSlider .item {
@@ -89,21 +94,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666', endCol
 .slider .item .caption {
 	color: #f7f7f7;
 	text-shadow: none;
-	font-size: 1.2em;
 	margin: 0 auto;
 	width: 100%;
+	position: relative;
+	top: -55px;
+	background: rgba(0, 0, 0, 0.7);
+	font-size: 1.7em;
+	padding: 10px;
+	display: block;
+}
+#mainSlider > div.owl-controls {
+	position: relative;
+	top: -50px;
 }
 .owl-theme .owl-controls .owl-page span {
 	background: #FF6600;
 }
-.owl-carousel .owl-wrapper-outer {
-border-top: 1px solid #6B6B6B;
-border-bottom: 1px solid #6B6B6B;
-padding: 9px 0 5px 0;
-}
 .sectionTitle.dark {
 	font-size: 1.5em;
 	margin: 0 0 3px 0;
+	display: none;
 }
 .sectionTitle.dark a,
 .sectionTitle.dark a:visited {
@@ -120,9 +130,13 @@ padding: 9px 0 5px 0;
 	border-bottom: 1px solid #999;
 	padding: 11px 0 8px;
 }
+#people {
+	position: relative;
+top: -23px;
+}
 footer.footer.ui-footer {
 
-background: #fff;
+	background: #fff;
 	text-align: center;
 	padding: 20px;
 	border-top: 2px solid #acacac;
