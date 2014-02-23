@@ -32,7 +32,9 @@
 			</div>
 
 			<div class='toolbar2'>
-				<a href="/NowPlaying/Stop/{[{movie.id}]}" ng-click="controls.stop()">Close VLC
+				<a href="/NowPlaying/Stop/{[{movie.id}]}" ng-click="controls.stop()">Close VLC</a>
+				<a class='fullscreen' href="#" ng-click="controls.fullscreen()">
+					<img src='/images/fullscreen.png'/>
 				</a>
 			</div>
 
@@ -222,5 +224,8 @@ a.controlBtn {
 	text-shadow: none;
 	font-weight: 100;
 	color: #ff6600;
+}
+#remote .toolbar2 .fullscreen {
+	margin-left: 20px;
 }
 </style>

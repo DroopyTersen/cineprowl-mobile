@@ -5,8 +5,8 @@
 		<p class="ui-li-desc">{{castStr}}</p>
 		<p class="ui-li-desc"><strong>{{release_date}}  | Rated: {{mpaa}}</strong></p>
 		<span class="ui-li-count">{{rating}}</span>
-		<span href='#' class='innerAction watchedToggle'>
-			<img src='/images/glyphicons/glyphicons_watched_{{watched}}.png'/>
+		<span href='#' class='innerAction watchedToggle {{#if watched}}watched{{/if}}'>
+			<img src='/images/glyphicons/glyphicons_watched_{{#if watched}}true{{else}}false{{/if}}.png'/>
 		</span>
 	</a>
 </li>

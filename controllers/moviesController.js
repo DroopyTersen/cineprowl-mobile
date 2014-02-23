@@ -73,6 +73,7 @@ module.exports = {
 
 	queue: function(req, res) {
 		movieService.queue().then(function(movies){
+			console.log(movies);
 			var viewModel = {
 				pageTitle: "Queue",
 				movies: movies,

@@ -57,7 +57,6 @@ module.exports = {
 	play: function(req, res) {
 		var id = parseInt(req.params.id, 10);
 		if (req.query.port) {
-			console.log("HEREERSDFWEFSDFWESFEWFEWWE");
 			config.vlc.port = req.query.port;
 			vlcService = new VlcService(config.vlc.url + req.query.port);
 		}
@@ -68,6 +67,8 @@ module.exports = {
 				Http.prototype.get(config.vlc.url + config.vlc.port + "/stop", null, true)
 					.then(function() {
 						res.redirect(req.url);
+					}).fail(function() {
+						console.log(arguments)
 					});
 			//Vlc status failed so nothing is playing
 			}, function() {
