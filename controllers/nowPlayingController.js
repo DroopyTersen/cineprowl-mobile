@@ -6,7 +6,7 @@ var movieService = new(require("../services/MovieService"))();
 var currentState = require("../currentState");
 var config = require("../config");
 var Http = require("droopy-http");
-var vlcService = new VlcService(config.vlc.url);
+var vlcService = new VlcService(config.vlc.url + config.vlc.port);
 
 var escapeRegEx = function(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -40,7 +40,7 @@ var vlcRequest = function(res, method, value) {
 var playMovie = function(res, id) {
 	movieService.getById(id)
 	.then(function(movie) {
-		var url = config.vlc.url + "/play?filepath=" + movie.file.filepath;
+		var url = config.vlc.url + config.vlc.port + "/play?filepath=" + movie.file.filepath;
 		return Http.prototype.get(url, null, true);
 	})
 	.then(function() {
@@ -56,16 +56,22 @@ module.exports = {
 	},	
 	play: function(req, res) {
 		var id = parseInt(req.params.id, 10);
+		if (req.query.port) {
+			console.log("HEREERSDFWEFSDFWESFEWFEWWE");
+			config.vlc.port = req.query.port;
+			vlcService = new VlcService(config.vlc.url + req.query.port);
+		}
 		//first check if something is already playing
 		vlcService.status()
 			//something is playing already so kill it
 			.then(function() {
-				Http.prototype.get(config.vlc.url + "/stop", null, true)
+				Http.prototype.get(config.vlc.url + config.vlc.port + "/stop", null, true)
 					.then(function() {
 						res.redirect(req.url);
 					});
 			//Vlc status failed so nothing is playing
 			}, function() {
+				console.log(req.query.port);
 				return playMovie(res, id);
 			});
 	},
@@ -78,7 +84,7 @@ module.exports = {
 		if (req.params.id) {
 			redirectUrl = "movies/details/" + parseInt(req.params.id, 10);
 		}
-		Http.prototype.get(config.vlc.url + "/stop", null, true).then(function() {
+		Http.prototype.get(config.vlc.url + config.vlc.port + "/stop", null, true).then(function() {
 			res.redirect(redirectUrl);
 		}).fail(function() {
 			console.log(arguments);

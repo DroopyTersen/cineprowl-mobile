@@ -9,12 +9,18 @@
 					<h3 class='screenOption'>This device</h3>
 				</a>
 			</div>
+			<div>			
+				<a href='#' class='vlc' data-id='{{id}}' data-port='5050'>
+					<img class='screenOption' src='/images/ratburn.jpg' alt='Laptop'/>
+					<h3 class='screenOption'>Laptop</h3>
+				</a>
+			</div>
 		</div>
 		<div class='block ui-block-b'>
 			<div>			
-				<a href='#' class='vlc' data-id='{{id}}'>
-					<img class='screenOption' src='/images/ratburn.jpg' alt='This device'/>
-					<h3 class='screenOption'>Ratburn</h3>
+				<a href='#' class='vlc' data-id='{{id}}' data-port='5051'>
+					<img class='screenOption' src='/images/muffy.jpg' alt='Bedroom'/>
+					<h3 class='screenOption'>Bedroom</h3>
 				</a>
 			</div>
 
@@ -26,7 +32,7 @@
 <script>
 	$("a.vlc").on("click", function (event) {
 		event.preventDefault();
-		var url = '/nowPlaying/play/' + $(this).data('id');
+		var url = '/nowPlaying/play/' + $(this).data('id') + "?port=" + $(this).data("port");
 		window.location.href = url;
 	});
 </script>
@@ -53,6 +59,8 @@ h3.screenOption {
 }
 img.screenOption {
 	width:100%;
+	height:170px;
+	max-width: 200px;
 }
 .block {
 	opacity: .9;
@@ -72,5 +80,7 @@ padding-left: 10px;
 .block > div {
 	border:4px solid #FF6600;
 	background: #fff;
+	margin: 30px 10px;
+	text-align: center;
 }
 <style>
