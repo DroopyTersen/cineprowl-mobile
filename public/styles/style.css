@@ -199,3 +199,34 @@ padding-left: 2px;
 .filmography .owned img {
 	opacity: 1;
 }
+
+
+#movieList > li.ui-btn > div.ui-btn-inner > div.ui-btn-text > a {
+	padding-left: 75px;
+}
+
+#movieList span.innerAction.watchedToggle {
+	position: absolute;
+	right: 44px;
+	top: 19px;
+}
+
+#movieList span.innerAction.watchedToggle > img {
+	width: 20px;
+	opacity: .8;
+}
+#movieList .ui-li-has-arrow.ui-li-has-count .ui-li-count {
+	top: 67px;
+}
+
+/*MENU PANEL*/
+#globalMenu .ui-li-has-thumb .ui-btn-inner a{
+	min-height: 20px;
+	padding-left: 40px;
+}
+
+#globalMenu .ui-li-thumb {
+width: 20px;
+height: 17px;
+padding: 13px 7px;
+}
