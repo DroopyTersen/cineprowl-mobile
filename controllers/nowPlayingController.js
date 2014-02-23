@@ -37,7 +37,19 @@ var vlcRequest = function(res, method, value) {
 			res.send(500, "Unable to get VLC status");
 		});
 };
-
+var playMovie = function(res, id) {
+	movieService.getById(id)
+	.then(function(movie) {
+		var url = config.vlc.url + "/play?filepath=" + movie.file.filepath;
+		return Http.prototype.get(url, null, true);
+	})
+	.then(function() {
+		res.redirect("/NowPlaying");
+	})
+	.fail(function(){
+		res.send(JSON.stringify(arguments));
+	});
+};
 module.exports = {
 	index: function(req, res) {
 		res.render("nowplaying/index");
@@ -46,21 +58,15 @@ module.exports = {
 		var id = parseInt(req.params.id, 10);
 		//first check if something is already playing
 		vlcService.status()
-			.then(function(){
-				res.redirect("/NowPlaying");
-			})
-			.fail(function() {
-				return movieService.getById(id);
-			})
-			.then(function(movie) {
-				var url = config.vlc.url + "/play?filepath=" + movie.file.filepath;
-				return Http.prototype.get(url, null, true);
-			})
+			//something is playing already so kill it
 			.then(function() {
-				res.redirect("/NowPlaying");
-			})
-			.fail(function(){
-				res.send(JSON.stringify(arguments));
+				Http.prototype.get(config.vlc.url + "/stop", null, true)
+					.then(function() {
+						res.redirect(req.url);
+					});
+			//Vlc status failed so nothing is playing
+			}, function() {
+				return playMovie(res, id);
 			});
 	},
 	vlc: function(req, res) {
@@ -72,7 +78,7 @@ module.exports = {
 		if (req.params.id) {
 			redirectUrl = "movies/details/" + parseInt(req.params.id, 10);
 		}
-		Http.prototype.get(config.vlc.url + "/stop").then(function() {
+		Http.prototype.get(config.vlc.url + "/stop", null, true).then(function() {
 			res.redirect(redirectUrl);
 		}).fail(function() {
 			console.log(arguments);

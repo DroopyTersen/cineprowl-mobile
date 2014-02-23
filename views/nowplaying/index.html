@@ -4,7 +4,7 @@
 		<section id='remote' ng-show='vlcStatus'>
 			<img class='backdrop' ng-src='{[{movie.backgroundUrl}]}' />
 			<a href='#' ng-click='controls.togglePause()' class='pauseToggle'>
-				<img class='play' ng-src='/images/{[{controls.pauseToggle}]}-large.png'/>
+				<img class='bigPauseToggle {[{controls.pauseToggle}]}' ng-src='/images/{[{controls.pauseToggle}]}-large.png'/>
 			</a>
 			<div class='progressInput' id='seekBar' ng-click='controls.seek($event)'>
 				<div class='progressValue' style='width: {[{vlcStatus.percentageDone}]}'></div>
@@ -50,24 +50,27 @@
 <script type="text/javascript" src='/js/ngNowPlaying.js'></script>
 
 <style>
+html {
+	background: #1e1e1e;
+}
 #nowPlaying .toolbar {
 	text-align: center;
 	margin: 25px 0 10px 0;
 }
 .controlBtn img {
-	height: 10px;
+	height: 15px;
 	margin: 2px;
 	background: rgba(200, 200, 200, .9);
 	text-align: center;
 	display: inline;
-	padding: 10px;
-	width: 10px;
+	padding: 15px;
+	width: 15px;
 	box-shadow: inset 0px 0px 2px 1px rgba(255, 255, 255, 1);
 	outline: 1px solid #FFFFFF;
 }
 .controlBtn.primary img {
-	width: 15px;
-	height: 15px;
+	width: 20px;
+	height: 20px;
 	margin: 0 10px;
 }
 
@@ -117,11 +120,22 @@ a.controlBtn {
 	width:100%;
 	border-top: 1px solid #8F8F8F;
 }
-#nowPlaying img.play {
+#nowPlaying .bigPauseToggle {
 	width: 30%;
-	left: 35%;
+	left: 39%;
 	top: 5%;
 	z-index: 2;
+	position: absolute;
+	opacity: .8;
+}
+#nowPlaying .bigPauseToggle:hover {
+	opacity: .9;
+}
+#nowPlaying .bigPauseToggle.play {
+	left: 39%;
+}
+#nowPlaying .bigPauseToggle.pause {
+	left: 35%;
 }
 .progressInput {
 	overflow: hidden;
