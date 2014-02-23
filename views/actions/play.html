@@ -24,18 +24,11 @@
 </div>
 
 <script>
-(function() {
 	$("a.vlc").on("click", function (event) {
 		event.preventDefault();
-		var url = '/actions/vlc/' + $(this).data('id');
-		$.get(url, function(){
-			$(".content").html("<h3>Launching VLC...</h3>");
-			setTimeout(function(){
-				$.mobile.changePage("/NowPlaying");
-			}, 1000)
-		});
+		var url = '/nowPlaying/play/' + $(this).data('id');
+		window.location.href = url;
 	});
-})();
 </script>
 
 <style>

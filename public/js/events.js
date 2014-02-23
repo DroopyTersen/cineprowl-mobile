@@ -75,7 +75,9 @@ eventHandlers.vlcToolbar = {
 		$.get("/nowplaying/togglepause", eventHandlers.vlcToolbar.refreshUI);
 	},
 	stop: function(e) {
-		$.get("nowPlaying/stop", function() {window.location.href = "/" });
+		$.get("nowPlaying/stop", function() { 
+			window.location.href = "/";
+		});
 	}
 };
 
@@ -130,10 +132,10 @@ var bindEvents = function() {
 	$(document).on("submit", "#searchPanel form", eventHandlers.search.submitSearch);
 	$(document).on("keyup", "input.searchAutocomplete", eventHandlers.search.searchBox);
 	$(document).on("panelopen", "#searchPanel", eventHandlers.search.openSearch);
-	$(document).on("slidestop", "#seek", eventHandlers.vlcToolbar.seek);
-	$(document).on("slidestop", "#volume", eventHandlers.vlcToolbar.volume);
-	$(document).on("click", "#pause", eventHandlers.vlcToolbar.togglePause);
-	$(document).on("click", "#stop", eventHandlers.vlcToolbar.stop);
+	//$(document).on("slidestop", "#seek", eventHandlers.vlcToolbar.seek);
+	//$(document).on("slidestop", "#volume", eventHandlers.vlcToolbar.volume);
+	//$(document).on("click", "#pause", eventHandlers.vlcToolbar.togglePause);
+	//$(document).on("click", "#stop", eventHandlers.vlcToolbar.stop);
 	$(document).on("loadMore", eventHandlers.scroll.loadMore);
 	$("#filterForm").on("submit", eventHandlers.filter.submit);
 };

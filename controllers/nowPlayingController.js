@@ -1,60 +1,82 @@
+"use strict";
+
 var movieService = new(require("../services/MovieService"))();
 var VlcService = require("droopy-vlc");
-var currentState = require("../currentstate");
+var movieService = new(require("../services/MovieService"))();
+var currentState = require("../currentState");
 var config = require("../config");
 var Http = require("droopy-http");
 var vlcService = new VlcService(config.vlc.url);
 
+var escapeRegEx = function(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+var vlcRequest = function(res, method, value) {
+	var vlcStatus = null;
+	vlcService[method](value)
+		.then(function(status){
+			vlcStatus = status;
+			var queryObject = {
+				"file.filename": {
+					"$regex": escapeRegEx(status.filename),
+					"$options": "i"
+				}
+			};
+			return movieService.findOne(queryObject);
+		})
+		.then(function(movie){
+			res.send({ 
+				vlcStatus: vlcStatus,
+				movie: movie 
+			});
+		})
+		.fail(function() {
+			console.log("ERROR IN FROM VLC SERVICE");
+			console.log(arguments);
+			res.send(500, "Unable to get VLC status");
+		});
+};
+
 module.exports = {
 	index: function(req, res) {
-		console.log(currentState);
-		vlcService.status().then(function(status) {
-			if (status) {
-				currentState.vlcStatus = status;
-			} else {
-				currentState.vlcStatus = null;
-			}
-			res.render("nowplaying/index", currentState);
-		}).fail(function() {
-			console.log("FAIL");
-			currentState.vlcStatus = null;
-			res.render("nowplaying/index", currentState);
-		});
+		res.render("nowplaying/index");
+	},	
+	play: function(req, res) {
+		var id = parseInt(req.params.id, 10);
+		//first check if something is already playing
+		vlcService.status()
+			.then(function(){
+				res.redirect("/NowPlaying");
+			})
+			.fail(function() {
+				return movieService.getById(id);
+			})
+			.then(function(movie) {
+				var url = config.vlc.url + "/play?filepath=" + movie.file.filepath;
+				return Http.prototype.get(url, null, true);
+			})
+			.then(function() {
+				res.redirect("/NowPlaying");
+			})
+			.fail(function(){
+				res.send(JSON.stringify(arguments));
+			});
 	},
-	status: function(req, res) {
-		vlcService.status().then(function(status) {
-			currentState.vlcStatus = status;
-			res.send(status);
-		});
-	},
-	seek: function(req, res) {
-		var seek = req.params.id;
-		vlcService.seek(seek).then(function(status) {
-			currentState.vlcStatus = status;
-			res.send(status);
-		});
-	},
-	volume: function(req, res) {
-		var volume = req.params.id;
-		vlcService.volume(volume).then(function(status) {
-			currentState.vlcStatus = status;
-			res.send(status);
-		});
-	},
-	togglepause: function(req, res) {
-		vlcService.togglePause().then(function(status) {
-			currentState.vlcStatus = status;
-			res.send(status);
-		});
+	vlc: function(req, res) {
+		var method = req.params.id;
+		vlcRequest(res, method, req.query.value);
 	},
 	stop: function(req, res) {
+		var redirectUrl = "/";
+		if (req.params.id) {
+			redirectUrl = "movies/details/" + parseInt(req.params.id, 10);
+		}
 		Http.prototype.get(config.vlc.url + "/stop").then(function() {
-			var movieId = currentstate.nowPlaying.id;
-			currentstate.nowPlaying = null;
-			currentstate.vlcStatus = null;
-			res.redirect("/movies/details/" + movieId);
-		}).fail(function(){
+			res.redirect(redirectUrl);
+		}).fail(function() {
 			console.log(arguments);
+			res.redirect("/");
 		});
 	}
 };

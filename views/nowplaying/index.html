@@ -1,27 +1,206 @@
-<div class='content' id='nowPlaying' data-role="content">
-	{{#if vlcStatus}}
-	<section>
-		<a href='#' class='play' id='pause'>
-			<img class='backdrop' src='{{nowPlaying.backgroundUrl}}' />
-			<img class='play' src='/images/pause-large.png'/>
-		</a>
-	</section>
-		<h1 class='title'>{{nowPlaying.title}}</h1>
-	<section class='sliders'>
-		<h2 id='time'></h2>
-		<input type="range" name="seek" id="seek" value="{{vlcStatus.time}}" tick="0.01" min="0" max="{{vlcStatus.duration}}"/>
-		<label>Volume</label>
-		<input type='range' name='volume' id='volume' value='{{vlcStatus.volume}}' min='0' max='200'/>
+<script src='/bower_components/angular/angular.min.js'></script>
+<div class='content' id='nowPlaying' data-role="content" ng-app='nowPlaying'>
+	<section ng-controller='nowPlayingController'>
+		<section id='remote' ng-show='vlcStatus'>
+			<img class='backdrop' ng-src='{[{movie.backgroundUrl}]}' />
+			<a href='#' ng-click='controls.togglePause()' class='pauseToggle'>
+				<img class='play' ng-src='/images/{[{controls.pauseToggle}]}-large.png'/>
+			</a>
+			<div class='progressInput' id='seekBar' ng-click='controls.seek($event)'>
+				<div class='progressValue' style='width: {[{vlcStatus.percentageDone}]}'></div>
+			</div>
+			<span class='time'>{[{vlcStatus.timeDisplay}]}</span>
+			<span class='duration'>{[{vlcStatus.durationDisplay}]}</span>
+			<h1 class='title'>{[{movie.title}]}</h1>
 
-		<a href='#' id='stop'>Stop</a>
+			<div class='toolbar'>
+				<a href="#" class='controlBtn' ng-click="controls.bigStepBack()">
+					<img src='/images/glyphicons/glyphicons_fast_backward.png'/>
+				</a>
+				<a href="#" class='controlBtn' ng-click="controls.stepBack()">
+					<img src='/images/glyphicons/glyphicons_step_backward.png'/>
+				</a>
+				<a href="#" class='controlBtn primary' ng-click="controls.togglePause()">
+					<img ng-class="{true: 'active'}[vlcStatus.state == 'paused']" ng-src='/images/glyphicons/glyphicons_{[{controls.pauseToggle}]}.png'/>
+				</a>
+				<a class='controlBtn' href="#" ng-click="controls.stepForward()">
+					<img src='/images/glyphicons/glyphicons_step_forward.png'/>
+				</a>
+				<a class='controlBtn' href="#" ng-click="controls.bigStepForward()">
+					<img src='/images/glyphicons/glyphicons_fast_forward.png'/>
+				</a>
+			</div>
+
+			<div class='toolbar2'>
+				<a href="/NowPlaying/Stop/{[{movie.id}]}" ng-click="controls.stop()">Close VLC
+				</a>
+			</div>
+
+			<div class='progressInput' id='volume' ng-click='controls.volume($event)'>
+				<img src='/images/glyphicons/glyphicons_volume_up.png' />
+				<div class='progressValue' style='width: {[{vlcStatus.volumePercent}]}'></div>
+			</div>
+		</section>
+		
+		<section ng-hide='vlcStatus'>
+			<h1>Nothing is currently playing...</h1>
+		</section>
 	</section>
-	<script type='text/javascript'>
-		nowPlaying = setInterval(function() {
-			$.get("/nowplaying/status", eventHandlers.vlcToolbar.refreshUI);
-		}, 1000);		
-	</script>
-	{{else}}
-		<h1 style='text-align:center'>Nothing is currently playing</h1>
-	{{/if}}
 </div>
+<script type="text/javascript" src='/js/ngNowPlaying.js'></script>
 
+<style>
+#nowPlaying .toolbar {
+	text-align: center;
+	margin: 25px 0 10px 0;
+}
+.controlBtn img {
+	height: 10px;
+	margin: 2px;
+	background: rgba(200, 200, 200, .9);
+	text-align: center;
+	display: inline;
+	padding: 10px;
+	width: 10px;
+	box-shadow: inset 0px 0px 2px 1px rgba(255, 255, 255, 1);
+	outline: 1px solid #FFFFFF;
+}
+.controlBtn.primary img {
+	width: 15px;
+	height: 15px;
+	margin: 0 10px;
+}
+
+body { background: #0ff; }
+
+@-webkit-keyframes 'blink' {
+    0% { background: rgba(200,200,200,1); }
+    50% { 
+    	background: rgba(200,200,200,.3); 
+    }
+    100% { background: rgba(200,200,200, 1); }
+}
+.controlBtn img.active {
+	box-shadow: none;
+	outline: 1px solid #ff6600;
+	background: rgba(200, 200, 200, 1);
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: blink;
+    -webkit-animation-timing-function: ease;  
+}
+
+.controlBtn:hover img {
+	background: rgba(200, 200, 200, 1);
+}
+
+a.controlBtn {
+	text-decoration: none;
+}
+#nowPlaying {
+	padding:0;
+	background: #1e1e1e;
+}
+#nowPlaying > section {
+	color:#f7f7f7;
+	background: #4c4c4c; /* Old browsers */
+	background: -moz-linear-gradient(top,  #4c4c4c 0%, #1e1e1e 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(100%,#1e1e1e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #4c4c4c 0%,#1e1e1e 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #4c4c4c 0%,#1e1e1e 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #4c4c4c 0%,#1e1e1e 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #4c4c4c 0%,#1e1e1e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#1e1e1e',GradientType=0 ); /* IE6-9 */
+}
+#nowPlaying .backdrop {
+	width:100%;
+	border-top: 1px solid #8F8F8F;
+}
+#nowPlaying img.play {
+	width: 30%;
+	left: 35%;
+	top: 5%;
+	z-index: 2;
+}
+.progressInput {
+	overflow: hidden;
+	height: 15px;
+	background-color: #aaa;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	border: 1px solid #FFF;
+	cursor: pointer;
+}
+.progressValue {
+	float: left;
+	width: 0%;
+	height: 100%;
+	font-size: 12px;
+	line-height: 20px;
+	color: #fff;
+	text-align: center;
+	background-color: #ff6600;
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+	box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+	-webkit-transition: width .3s ease;
+	transition: width .3s ease;
+	box-shadow: inset 0 0 8px #FF9F5F;
+	border-right: 5px solid #A82F00;
+}
+#volume {
+	width: 160px;
+	height: 50px;
+	float: right;
+	margin-right: 10px;
+	position: relative;
+	border: none;
+	margin-bottom: 36px;
+}
+#volume:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-top: 40px solid #1e1e1e;
+	border-right: 160px solid rgba(0,0,0,0);
+	width: 0;
+}
+#volume > img {
+	position: absolute;
+	top: 15px;
+	right: 10px;
+	opacity: 0.7;
+}
+#seekBar {
+	position: relative;
+	top:-3px;
+}
+#remote .time {
+	float:left;
+	padding-left:10px;
+	font-size: .8em;
+}
+#remote .duration {
+	float:right;
+	padding-right:10px;
+	font-size: .8em;
+}
+#remote .title {
+	margin: 25px 10px 15px;
+	font-size: 1.5em;
+	border-bottom: 1px solid #888;
+	padding-bottom: 3px;
+}
+#remote > .toolbar2 {
+	float: left;
+	margin-left: 10px;
+	position: relative;
+	top: 30px;
+}
+#remote > .toolbar2 > a {
+	text-shadow: none;
+	font-weight: 100;
+	color: #ff6600;
+}
+</style>
