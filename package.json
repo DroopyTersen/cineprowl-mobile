@@ -12,6 +12,8 @@
     "request": "~2.27.0",
     "droopy-moviedb": "~0.0.1",
     "droopy-vlc": "~0.0.1",
-    "droopy-http": "0.0.1"
+    "droopy-http": "0.0.1",
+    "passport-google": "~0.3.0",
+    "passport": "~0.2.0"
   }
 }

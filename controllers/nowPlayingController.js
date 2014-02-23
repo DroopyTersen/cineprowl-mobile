@@ -68,7 +68,7 @@ module.exports = {
 					.then(function() {
 						res.redirect(req.url);
 					}).fail(function() {
-						console.log(arguments)
+						console.log(arguments);
 					});
 			//Vlc status failed so nothing is playing
 			}, function() {
