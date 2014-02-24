@@ -19,24 +19,5 @@ module.exports = {
 		app.get("/:controller", authentication.check, function(req, res) {
 			controllers[req.params.controller.toLowerCase()].index(req, res);
 		});
-
-		//fall back for 404's
-		app.use(function(req, res) {
-			res.status(404);
-			// respond with html page
-			if (req.accepts("html")) {
-				res.render("404", {
-					url: req.url
-				});
-				return;
-			}
-			// respond with json
-			if (req.accepts("json")) {
-				res.send({
-					error: "Not Found"
-				});
-				return;
-			}
-		});
 	}
 };
