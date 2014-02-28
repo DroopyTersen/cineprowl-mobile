@@ -20,7 +20,7 @@ eventHandlers.search = {
 		} else {
 			var searchText = encodeURIComponent(searchBox.val());
 			$searchResults = $("#searchResults");
-			$searchResults.load("/movies/search/" + searchText, function() {
+			$searchResults.load("/search/query/" + searchText, function() {
 				$searchResults.closest("[data-role=page]:visible").trigger("create");
 				$(".searchResult").first().addClass("selected");
 			});

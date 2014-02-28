@@ -46,31 +46,6 @@ module.exports = {
 		currentState.filter.watched = false;
 		listView(res);
 	},
-	remove: function(req, res) {
-		var movieId = parseInt(req.params.id, 10);
-		movieService.remove(movieId);
-		res.send("success. (hopefully...)")
-	},
-	togglewatched: function(req, res) {
-		var movieId = parseInt(req.params.id, 10);
-		var watched = (req.query.watched.toLowerCase() === "true");
-		movieService.toggleWatched(movieId, watched);
-		res.send("success");
-	},
-	togglefavorite: function(req, res) {
-		var movieId = parseInt(req.params.id, 10);
-		var value = (req.query.favorite.toLowerCase() === "true") ? new Date() : null;
-		movieService.setTag(movieId, "favorited", value);
-		res.send("success");
-	},
-
-	togglequeue: function(req, res) {
-		var movieId = parseInt(req.params.id, 10);
-		var value = (req.query.queue.toLowerCase() === "true") ? new Date() : null;
-		movieService.setTag(movieId, "queued", value);
-		res.send("success");
-	},
-
 	queue: function(req, res) {
 		movieService.queue().then(function(movies){
 			console.log(movies);
@@ -129,15 +104,6 @@ module.exports = {
 		var id = parseInt(req.params.id, 10);
 		movieService.getById(id).then(function(movie) {
 			res.render("movies/details", movie);
-		});
-	},
-	search: function(req, res) {
-		var search = req.params.id;
-		movieService.search(search).then(function(movies) {
-			res.render("partials/searchResults", {
-				movies: movies,
-				layout: false
-			});
 		});
 	},
 	filter: function(req, res) {

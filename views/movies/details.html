@@ -42,6 +42,9 @@
 		    <li>
 		    	<a id="deleteButton" href="#">Delete Movie</a>
 		    </li>
+		    <li>
+		    	<a id="imdbButton" href="/actions/updateImdb/{{id}}">Update Imdb Rating</a>
+		    </li>
 		</ul>
 	</section>
 	
@@ -84,7 +87,7 @@
 		var $this = $(this);
 		var watched = $this.children().first().text() === "Watched";
 		var id = $("#movieId").val();
-		$.get("/movies/toggleWatched/" + id + "?watched=" + !watched);
+		$.get("/actions/toggleWatched/" + id + "?watched=" + !watched);
 		var newText = watched ? "Unwatched" : "Watched";
 		$this.children().first().text(newText);
 	});
@@ -92,7 +95,7 @@
 		event.preventDefault();
 		if(window.confirm("Are you sure you want to delete?")) {
 			var id = $("#movieId").val();
-			$.get("/movies/remove/" + id).done(function() {
+			$.get("/actions/remove/" + id).done(function() {
 				console.log("HERE");
 				if (window.history && window.history.back) {
 					window.history.back();
@@ -107,7 +110,7 @@
 		var $this = $(this);
 		var value = $this.text().indexOf("Add to") > -1;
 		var collection = $this.data("collection");
-		var url = "/movies/toggle" + collection + "/" + $("#movieId").val() + "?" + collection + "=" + value;
+		var url = "/actions/toggle" + collection + "/" + $("#movieId").val() + "?" + collection + "=" + value;
 		$.get(url);
 		var newText = value ? "Remove from " : "Add to ";
 		newText += collection;

@@ -7,4 +7,12 @@
 		</a>
 	</li>
 	{{/movies}}
+	{{#people}}
+	<li class='searchResult' data-icon="false">
+		<a href='/people/details/{{id}}' title='{{name}}'>
+			<img src='{{profileImage}}'/>
+			<h4 class="ui-li-heading">{{name}}</h4>
+		</a>
+	</li>
+	{{/people}}
 </ul>

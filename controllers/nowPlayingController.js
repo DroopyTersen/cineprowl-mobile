@@ -37,6 +37,7 @@ var vlcRequest = function(res, method, value) {
 			res.send(500, "Unable to get VLC status");
 		});
 };
+
 var playMovie = function(res, id) {
 	movieService.getById(id)
 	.then(function(movie) {
@@ -50,6 +51,7 @@ var playMovie = function(res, id) {
 		res.send(JSON.stringify(arguments));
 	});
 };
+
 module.exports = {
 	index: function(req, res) {
 		res.render("nowplaying/index");
