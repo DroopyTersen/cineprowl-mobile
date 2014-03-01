@@ -234,3 +234,12 @@ width: 20px;
 height: 17px;
 padding: 13px 7px;
 }
+
+.thumbOverlay {
+position: absolute;
+top: 60px;
+color: #fff;
+opacity: .65;
+font-size: 2.5em;
+left: 5px;
+}

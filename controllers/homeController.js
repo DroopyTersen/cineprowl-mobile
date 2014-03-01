@@ -2,6 +2,7 @@
 var movieService = new(require("../services/MovieService"))();
 var imageHelper = require("../models/imageHelper");
 var Q = require("q");
+
 module.exports = {
 	index: function(req, res) {
 		var recentPromise = movieService.query({}, {addedToDb: -1}, 0, 6);

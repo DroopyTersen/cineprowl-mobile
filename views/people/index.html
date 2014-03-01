@@ -1,0 +1,70 @@
+
+<div class='content' data-role='content'>
+	<h1>Most Appearances</h1>
+	<section class='ui-grid-a primary people'>
+		<div class='block ui-block-a'>
+			{{#evens}}
+			<div class='person'>
+		    	<a href='/people/details/{{id}}' title='{{name}}'>
+		    		<img class='movie' src='{{profileImage}}'/>
+		    		<h1 class='thumbOverlay count'>{{count}}</h1>
+		    		<h2 class='thumbOverlay name'>{{name}}</h2>
+	    		</a>
+			</div>
+			{{/evens}}
+		</div>
+		<div class='block ui-block-b'>
+			{{#odds}}
+			<div class='person'>
+		    	<a href='/people/details/{{id}}' title='{{name}}'>
+		    		<img class='movie' src='{{profileImage}}'/>
+		    		<h1 class='thumbOverlay count'>{{count}}</h1>
+		    		<h2 class='thumbOverlay name'>{{name}}</h2>
+	    		</a>
+			</div>
+			{{/odds}}
+		</div>
+	</section>
+</div>
+
+<style>
+.content > h1 {
+	text-align: center;
+	margin: 0;
+}
+.ui-body-a {
+	background: #ddd;
+}
+.people .person {
+	position: relative;
+	width:100%;
+	text-align: center;
+	margin:15px 0;
+}
+.people .person img {
+border: 4px solid #ff6600;
+height: 200px;
+box-shadow: 0 0 5px 1px #A2A2A2;
+width:135px;
+}
+.person .thumbOverlay.count {
+bottom: -55px;
+opacity: .65;
+font-size: 5em;
+}
+.person .thumbOverlay {
+	position: absolute;
+	color: #fff;
+	width: 100%;
+	top: auto;
+	left: auto;
+}
+.person .thumbOverlay.name {
+bottom: auto;
+opacity: .65;
+font-size: 2.0em;
+top: -20px;
+width: 137px;
+left: 20px;
+}
+</style>

@@ -29,10 +29,11 @@
 	</div>
 	<section id='people'class='subSection'>
 		<h2 class='sectionTitle'>Prolific Actors</h2>
-		<div id='' style='margin:0 auto' class='owl-carousel owl-theme carousel'>
+		<div style='margin:0 auto' class='owl-carousel owl-theme carousel'>
 			{{#actors}}
 	    	<a href='/people/details/{{id}}' title='{{name}}'>
 	    		<img class='movie' src='{{profileImage}}'/>
+	    		<h1 class='thumbOverlay'>{{count}}</h1>
     		</a>
 			{{/actors}}
 		</div>
