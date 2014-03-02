@@ -1,8 +1,9 @@
-var	GoogleStrategy = require("passport-google").Strategy,
+var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy,
 	config = require("./config");
 
 var findUser = function(profile, callback) {
 	var match = false;
+	console.log(profile);
 	for (var i = 0; i < profile.emails.length; i++) {
 		if (config.users[profile.emails[i].value]) {
 			match = true;
@@ -23,10 +24,10 @@ var checkAuth = function(req, res, next) {
 };
 
 var configureRoutes = function(app, passport) {
-	app.get('/login', passport.authenticate('google'));
+	app.get('/login', passport.authenticate('google', {scope: 'email'}));
 
 	app.get('/auth/google/return', function(req, res, next) {
-		passport.authenticate('google', function(err, user, info) {
+		passport.authenticate('google', { scope: 'email'}, function(err, user, info) {
 			if (err) {
 				return next(err);
 			}
@@ -40,16 +41,18 @@ var configureRoutes = function(app, passport) {
 };
 
 var init = function(app, passport) {
+	var env = config.port === 4444 ? "dev" : "prod";
 	passport.use(new GoogleStrategy({
-			returnURL: config.url + config.port + '/auth/google/return',
-			realm: config.url + config.port
+			clientID: config.googleOAuth[env].clientID,
+			clientSecret: config.googleOAuth[env].clientSecret,
+			callbackURL: config.googleOAuth[env].callbackHost + '/auth/google/return'
 		},
-		function(identifier, profile, done) {
+		function(accessToken, refreshToken, profile, done) {
 			findUser(profile, function(err, user) {
-				done(err, user);
+				return done(err, user);
 			});
 		}
-	));	
+	));
 	app.use(passport.initialize());
 };
 

@@ -15,6 +15,7 @@
     "droopy-http": "0.0.1",
     "passport-google": "~0.3.0",
     "passport": "~0.2.0",
-    "droopy-imdb": "0.0.1"
+    "droopy-imdb": "0.0.1",
+    "passport-google-oauth": "~0.1.5"
   }
 }

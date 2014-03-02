@@ -96,7 +96,7 @@
 	color: #f7f7f7;
 	text-shadow: none;
 	margin: 0 auto;
-	width: 100%;
+	/*width: 100%;*/
 	position: relative;
 	top: -46px;
 	background: rgba(0, 0, 0, 0.7);
@@ -165,10 +165,10 @@ $(document).ready(function() {
   var owl = $("#owl-demo");
  
   $(".carousel").owlCarousel({
-      items : 10, //10 items above 1000px browser width
-      itemsDesktop : [1000,7], //7 items between 1000px and 801px
-      itemsDesktopSmall : [700,5], // betweem 900px and 601px
-      itemsTablet : [500,4], // itemsMobile disabled - inherit from itemsTablet option
+      // items : 10, //10 items above 1000px browser width
+      // itemsDesktop : [1000,7], //7 items between 1000px and 801px
+      itemsDesktopSmall : [700,6], // betweem 900px and 601px
+      itemsTablet : [500,4], //
       itemsMobile : [400, 3] // itemsMobile disabled - inherit from itemsTablet option
   });
 });

@@ -9,6 +9,33 @@ a {
 h1, h2, h3, h4, h5 {
 	font-weight: 100;
 }
+body.ui-mobile-viewport {
+background: #b7b7b7; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, #b7b7b7 0%, #8e8e8e 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#b7b7b7), color-stop(100%,#8e8e8e)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover, #b7b7b7 0%,#8e8e8e 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover, #b7b7b7 0%,#8e8e8e 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover, #b7b7b7 0%,#8e8e8e 100%); /* IE10+ */
+background: radial-gradient(ellipse at center, #b7b7b7 0%,#8e8e8e 100%); /* W3C */
+}
+
+.ui-page.ui-body-a {
+	background: #fff;
+	padding-top: 0 !important;
+}
+
+.ui-page.ui-body-a,{
+max-width: 750px;
+margin: 0 auto;
+position: static;
+}
+.ui-page.ui-body-a,
+.ui-page.ui-body-a .ui-header {
+	max-width: 750px;
+	margin:0 auto;
+	position: static;
+}
+
 .ui-body-a,
 .ui-body-a input,
 .ui-body-a select,
