@@ -1,4 +1,4 @@
-var currentState = require("../currentState");
+var currentState = require("../currentstate");
 
 var isSelected = function (filterType, value) {
 	return currentState.filter[filterType] == value ? "selected" : "";

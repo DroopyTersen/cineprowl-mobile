@@ -1,5 +1,5 @@
-var movieService = new(require("../services/MovieService"))();
-var currentState = require("../currentState");
+var movieService = new(require("CineProwl-Services")).MovieService();
+var currentState = require("../currentstate");
 
 var listView = function(res) {
 	movieService.query(currentState.filter, currentState.sort).then(function(movies) {

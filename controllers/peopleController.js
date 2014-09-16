@@ -1,10 +1,9 @@
-var movieService = new(require("../services/MovieService"))();
+var movieService = new(require("CineProwl-Services")).MovieService();
 var config = require('../config');
 var movieDbService = new(require("droopy-moviedb"))(config.movieDb.key);
 
-var movieService = new(require("../services/MovieService"))();
-var Person = require("../models/Person");
-var imageHelper = require("../models/imageHelper");
+var Person = require("CineProwl-Models").Person;
+var imageHelper = require("CineProwl-Models").imageHelper;
 var q = require("q");
 
 module.exports = {

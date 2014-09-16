@@ -1,6 +1,7 @@
 module.exports = {
 	url: "http://localhost:",
 	port: process.env.PORT || 4444,
+	host: process.env.IP || "localhost",
 	movieDb: {
 		key: "9bc8fa1df47f3dde957bbd7f9dd5b48a"
 	},

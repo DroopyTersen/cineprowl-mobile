@@ -1,7 +1,7 @@
 "use strict";
-var movieService = new(require("../services/MovieService"))();
+var movieService = new(require("CineProwl-Services")).MovieService();
 var imdbService = new(require("droopy-imdb"))();
-var currentState = require("../currentState");
+var currentState = require("../currentstate");
 var config = require("../config");
 var Http = require("droopy-http");
 var vlcService = new(require("droopy-vlc"))(config.vlc.url);

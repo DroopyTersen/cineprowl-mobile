@@ -1,7 +1,7 @@
 var express = require('express'),
 	http = require('http'),
 	hbs = require("hbs"),
-	passport = require("passport");
+	passport = require("passport"),
 	config = require("./config");
 
 
@@ -45,5 +45,5 @@ app.use(express.static("public"));
 app.use(app.router);
 
 var port = process.env.PORT || config.port;
-app.listen(port);
+app.listen(process.env.PORT, process.env.IP);
 console.log("CineProwl started on port " + port);
