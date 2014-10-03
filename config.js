@@ -9,6 +9,9 @@ module.exports = {
 		url: "http://:rival5sof@runwatcher.com:",
 		port: "5050"
 	},
+	streamer: {
+		url: "http://runwatcher.com:8081/stream/"
+	},
 	nas: {
 		url: "https://runwatcher.com/manage/shares/Movies/"
 	},

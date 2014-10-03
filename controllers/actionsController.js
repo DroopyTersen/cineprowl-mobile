@@ -10,6 +10,7 @@ module.exports = {
 	play: function(req, res) {
 		var id = parseInt(req.params.id, 10);
 		movieService.getById(id).then(function(movie) {
+			movie.playUrl = config.streamer.url + movie.id;
 			res.render("actions/play", movie);
 		});
 	},
