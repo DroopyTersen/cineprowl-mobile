@@ -9,10 +9,11 @@ var vlcService = new(require("droopy-vlc"))(config.vlc.url);
 module.exports = {
 	play: function(req, res) {
 		var id = parseInt(req.params.id, 10);
-		movieService.getById(id).then(function(movie) {
-			movie.playUrl = config.streamer.url + movie.id;
-			res.render("actions/play", movie);
-		});
+		var viewModel = {
+			id: id,
+			playUrl: config.streamer.url + id;
+		};
+		res.render("actions/play", viewModel);
 	},
 	updateimdb: function(req, res) {
 		var id = parseInt(req.params.id, 10);
