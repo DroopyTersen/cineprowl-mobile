@@ -11,7 +11,7 @@ module.exports = {
 		var id = parseInt(req.params.id, 10);
 		var viewModel = {
 			id: id,
-			playUrl: config.streamer.url + id;
+			playUrl: config.streamer.url + id
 		};
 		res.render("actions/play", viewModel);
 	},
