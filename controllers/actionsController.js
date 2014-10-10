@@ -15,6 +15,14 @@ module.exports = {
 		};
 		res.render("actions/play", viewModel);
 	},
+	watch: function(req, res) {
+		var id = parseInt(req.params.id, 10);
+		var viewModel = {
+			id: id,
+			playUrl: config.streamer.url + id
+		};
+		res.render("actions/watch", viewModel);
+	},
 	updateimdb: function(req, res) {
 		var id = parseInt(req.params.id, 10);
 		movieService.getById(id)
