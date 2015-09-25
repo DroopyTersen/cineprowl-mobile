@@ -45,5 +45,9 @@ app.use(express.static("public"));
 app.use(app.router);
 
 var port = process.env.PORT || config.port;
-app.listen(process.env.PORT, process.env.IP);
+if (process.env.IP) {
+	app.listen(port, process.env.IP);
+} else {
+	app.listen(port);
+}
 console.log("CineProwl started on port " + port);
