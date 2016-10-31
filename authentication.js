@@ -42,6 +42,7 @@ var configureRoutes = function(app, passport) {
 
 var init = function(app, passport) {
 	var env = config.port === 4444 ? "dev" : "prod";
+	env = "prod";
 	passport.use(new GoogleStrategy({
 			clientID: config.googleOAuth[env].clientID,
 			clientSecret: config.googleOAuth[env].clientSecret,

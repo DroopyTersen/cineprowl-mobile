@@ -10,7 +10,7 @@
 				</a>
 			</div>
 			<div>			
-				<a href='#' class='vlc' data-id='{{id}}' data-port='5051'>
+				<a href='#' class='device' data-id='{{id}}' data-target='muffy'>
 					<img class='screenOption' src='/images/muffy.jpg' alt='Bedroom'/>
 					<h3 class='screenOption'>Bedroom</h3>
 				</a>
@@ -19,15 +19,15 @@
 		</div>
 		<div class='block ui-block-b'>
 			<div>			
-				<a href='#' class='vlc' data-id='{{id}}' data-port='5050'>
+				<a href='#' class='device' data-id='{{id}}' data-target='thora'>
 					<img class='screenOption' src='/images/thora.jpg' alt='Thora'/>
 					<h3 class='screenOption'>Living Room</h3>
 				</a>
 			</div>
 			<div>			
-				<a href='#' class='vlc' data-id='{{id}}' data-port='5052'>
-					<img class='screenOption' src='/images/ratburn.jpg' alt='Laptop'/>
-					<h3 class='screenOption'>Laptop</h3>
+				<a href='#' class='device' data-id='{{id}}' data-target='thora'>
+					<img class='screenOption' src='/images/ratburn.jpg' alt='Luc Longley (raspberry pi)'/>
+					<h3 class='screenOption'>Basement</h3>
 				</a>
 			</div>
 
@@ -37,9 +37,9 @@
 </div>
 
 <script>
-	$("a.vlc").on("click", function (event) {
+	$("a.device").on("click", function (event) {
 		event.preventDefault();
-		var url = '/nowPlaying/play/' + $(this).data('id') + "?port=" + $(this).data("port");
+		var url = '/nowPlaying/play/' + $(this).data('id') + "?target=" + $(this).data("target");
 		window.location.href = url;
 	});
 </script>

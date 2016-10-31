@@ -10,7 +10,7 @@ module.exports = {
 		port: "5050"
 	},
 	streamer: {
-		url: "http://runwatcher.com:8081/stream/"
+		url: "http://api.cineprowl.com/stream/"
 	},
 	nas: {
 		url: "https://runwatcher.com/manage/shares/Movies/"

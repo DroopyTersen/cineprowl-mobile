@@ -6,6 +6,7 @@ var currentState = require("../currentstate");
 var config = require("../config");
 var Http = require("droopy-http");
 var vlcService = new VlcService(config.vlc.url + config.vlc.port);
+var iotEvents = require("droopy-iot").create("m.cineprowl");
 
 var escapeRegEx = function(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
@@ -57,25 +58,28 @@ module.exports = {
 	},	
 	play: function(req, res) {
 		var id = parseInt(req.params.id, 10);
-		if (req.query.port) {
-			config.vlc.port = req.query.port;
-			vlcService = new VlcService(config.vlc.url + req.query.port);
-		}
-		//first check if something is already playing
-		vlcService.status()
-			//something is playing already so kill it
-			.then(function() {
-				Http.prototype.get(config.vlc.url + config.vlc.port + "/stop", null, true)
-					.then(function() {
-						res.redirect(req.url);
-					}).fail(function() {
-						console.log(arguments);
-					});
-			//Vlc status failed so nothing is playing
-			}, function() {
-				console.log(req.query.port);
-				return playMovie(res, id);
-			});
+        var target = req.query.target;
+        iotEvents.trigger("play-movie", {id: id}, target);
+        res.redirect("/movies/details/" + id);
+		// if (req.query.port) {
+		// 	config.vlc.port = req.query.port;
+		// 	vlcService = new VlcService(config.vlc.url + req.query.port);
+		// }
+		// //first check if something is already playing
+		// vlcService.status()
+		// 	//something is playing already so kill it
+		// 	.then(function() {
+		// 		Http.prototype.get(config.vlc.url + config.vlc.port + "/stop", null, true)
+		// 			.then(function() {
+		// 				res.redirect(req.url);
+		// 			}).fail(function() {
+		// 				console.log(arguments);
+		// 			});
+		// 	//Vlc status failed so nothing is playing
+		// 	}, function() {
+		// 		console.log(req.query.port);
+		// 		return playMovie(res, id);
+		// 	});
 	},
 	vlc: function(req, res) {
 		var method = req.params.id;
