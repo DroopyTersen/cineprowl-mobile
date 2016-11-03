@@ -1,4 +1,4 @@
-
+<script src='http://iot.droopytersen.us/dist/droopyIot.js'></script>
 <div class='content' data-role='content'>
 	<h1 class='centeredTitle'>Choose a screen</h1>
 	<section class='ui-grid-a primary'>
@@ -25,7 +25,7 @@
 				</a>
 			</div>
 			<div>			
-				<a href='#' class='device' data-id='{{id}}' data-target='thora'>
+				<a href='#' class='device' data-id='{{id}}' data-target='brain'>
 					<img class='screenOption' src='/images/ratburn.jpg' alt='Luc Longley (raspberry pi)'/>
 					<h3 class='screenOption'>Basement</h3>
 				</a>
@@ -37,9 +37,13 @@
 </div>
 
 <script>
+    var iot = droopyIot.register("cineprowl-mobile");
 	$("a.device").on("click", function (event) {
+        var target = $(this).data("target");
+        var id = $(this).data('id');
+        iot.trigger("play-movie", { id }, target);
 		event.preventDefault();
-		var url = '/nowPlaying/play/' + $(this).data('id') + "?target=" + $(this).data("target");
+		var url = '/movies/details/' + id;
 		window.location.href = url;
 	});
 </script>
@@ -91,4 +95,4 @@ img.screenOption {
 	margin: 0 0 20px;
 	text-align: center;
 }
-<style>
+</style>
