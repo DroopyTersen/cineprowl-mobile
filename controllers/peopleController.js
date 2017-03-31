@@ -1,4 +1,4 @@
-var movieService = new(require("cineprowl-services")).MovieService();
+var movieService = require("../movieService");
 var config = require('../config');
 var movieDbService = new(require("droopy-moviedb"))(config.movieDb.key);
 

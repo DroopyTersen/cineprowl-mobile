@@ -1,5 +1,5 @@
 "use strict";
-var movieService = new(require("cineprowl-services")).MovieService();
+var movieService = require("../movieService");
 var imageHelper = require("cineprowl-models").imageHelper;
 var Q = require("q");
 

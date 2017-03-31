@@ -1,5 +1,5 @@
 "use strict";
-var movieService = new(require("cineprowl-services")).MovieService();
+var movieService = require("../movieService");
 var imdbService = new(require("droopy-imdb"))();
 var currentState = require("../currentstate");
 var config = require("../config");
