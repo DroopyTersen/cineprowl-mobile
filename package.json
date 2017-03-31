@@ -6,8 +6,8 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "Cineprowl-Models": "https://github.com/droopytersen/cineprowl-models",
-    "Cineprowl-Services": "git://github.com/droopytersen/cineprowl-services.git",
+    "cineprowl-models": "git://github.com/droopytersen/cineprowl-models.git",
+    "cineprowl-services": "git://github.com/droopytersen/cineprowl-services.git",
     "droopy-http": "0.0.1",
     "droopy-imdb": "0.0.1",
     "droopy-iot": "^1.0.1",

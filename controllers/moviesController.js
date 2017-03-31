@@ -1,4 +1,4 @@
-var movieService = new(require("CineProwl-Services")).MovieService();
+var movieService = new(require("cineprowl-services")).MovieService();
 var currentState = require("../currentstate");
 
 var listView = function(res) {

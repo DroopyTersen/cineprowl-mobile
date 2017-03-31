@@ -1,5 +1,5 @@
-var movieService = new(require("CineProwl-Services")).MovieService();
-var imageHelper = require("CineProwl-Models").imageHelper;
+var movieService = new(require("cineprowl-services")).MovieService();
+var imageHelper = require("cineprowl-models").imageHelper;
 
 module.exports = {
 	index: function (req, res) {
