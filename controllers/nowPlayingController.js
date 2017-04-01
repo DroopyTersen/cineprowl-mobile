@@ -7,7 +7,7 @@ var currentState = require("../currentstate");
 var config = require("../config");
 var Http = require("droopy-http");
 var vlcService = new VlcService(config.vlc.url + config.vlc.port);
-var iotEvents = require("droopy-iot").create("m.cineprowl");
+// var iotEvents = require("droopy-iot").create("m.cineprowl");
 
 var escapeRegEx = function(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

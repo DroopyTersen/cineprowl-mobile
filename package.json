@@ -10,7 +10,6 @@
     "cineprowl-services": "git://github.com/droopytersen/cineprowl-services.git",
     "droopy-http": "0.0.1",
     "droopy-imdb": "0.0.1",
-    "droopy-iot": "^1.0.1",
     "droopy-moviedb": "~0.0.1",
     "droopy-vlc": "~0.0.1",
     "express": "3.4.0",
